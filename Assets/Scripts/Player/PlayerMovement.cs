@@ -12,21 +12,11 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private LayerMask jumpableGround;
 
-    //Basic Movements
     private float dirX = 0f;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 14f;
+    private bool doubleJump;
 
-    //Dashing
-    private bool canDash = true;
-    private bool isDashing;
-    private float dashingPower = 24f;
-    private float dashingTime = 0.2f;
-    [SerializeField] private float dashingCooldown = 1f;
-
-    [SerializeField] private TrailRenderer tr;
-
-    //Animation
     private enum movementState { idle, running, jumping, fall}
     
 
@@ -42,20 +32,44 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+<<<<<<< HEAD
+<<<<<<< HEAD
+        //Disable movement while dashing
         if (isDashing)
         {
             return;
         }
 
-
+        //Moving left or right
+=======
+>>>>>>> parent of f25dc7e (Dashing)
+=======
+>>>>>>> parent of f25dc7e (Dashing)
         dirX = Input.GetAxis("Horizontal");
         RB.velocity = new Vector2 (dirX * moveSpeed, RB.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && isGrounded())
+        //Jumping
+        if (isGrounded() && Input.GetButton("Jump"))
         {
             RB.velocity = new Vector2(RB.velocity.x, jumpForce);
+
+            doubleJump = false;
         }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (!isGrounded() && !doubleJump)
+            {
+                anim.SetBool("doubleJump", true);
+                RB.velocity = new Vector2(RB.velocity.x, jumpForce);
+                doubleJump = !doubleJump;
+            }
+            
+        }
+
+        //Do dashing
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             StartCoroutine(Dash());
@@ -64,8 +78,13 @@ public class PlayerMovement : MonoBehaviour
 
 
         //Calls the animation
+=======
+>>>>>>> parent of f25dc7e (Dashing)
+=======
+>>>>>>> parent of f25dc7e (Dashing)
         updateAnimation();
-        
+        //Calls the animation
+       
     }
 
     private void updateAnimation()
@@ -109,27 +128,5 @@ public class PlayerMovement : MonoBehaviour
         */
 
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.1f, jumpableGround);
-    }
-
-    private IEnumerator Dash()
-    {
-        canDash = false;
-        isDashing = true;
-        float originalGravity = RB.gravityScale;
-        RB.gravityScale = 0f;
-        if (!sprite.flipX)
-        {
-            RB.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        } else if (sprite.flipX)
-        {
-            RB.velocity = new Vector2(transform.localScale.x * -dashingPower, 0f);
-        }
-        tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
-        tr.emitting = false;
-        RB.gravityScale = originalGravity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
     }
 }
