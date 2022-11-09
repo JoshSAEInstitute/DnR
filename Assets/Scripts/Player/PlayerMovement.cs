@@ -32,19 +32,15 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         //Disable movement while dashing
-        if (isDashing)
-        {
-            return;
-        }
+        //if (isDashing)
+        //{
+          //  return;
+       // }
 
         //Moving left or right
-=======
->>>>>>> parent of f25dc7e (Dashing)
-=======
->>>>>>> parent of f25dc7e (Dashing)
+
         dirX = Input.GetAxis("Horizontal");
         RB.velocity = new Vector2 (dirX * moveSpeed, RB.velocity.y);
 
@@ -56,8 +52,7 @@ public class PlayerMovement : MonoBehaviour
             doubleJump = false;
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         if (Input.GetButtonDown("Jump"))
         {
             if (!isGrounded() && !doubleJump)
@@ -70,20 +65,17 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Do dashing
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-        {
-            StartCoroutine(Dash());
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        //{
+            //StartCoroutine(Dash());
+        //}
 
 
 
         //Calls the animation
-=======
->>>>>>> parent of f25dc7e (Dashing)
-=======
->>>>>>> parent of f25dc7e (Dashing)
+
         updateAnimation();
-        //Calls the animation
+
        
     }
 
