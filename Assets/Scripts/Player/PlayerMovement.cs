@@ -12,13 +12,23 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private LayerMask jumpableGround;
 
+    //Basic Movements
     private float dirX = 0f;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 14f;
-    private bool doubleJump;
 
-    private enum movementState { idle, running, jumping, fall}
-    
+    //Dashing
+    private bool canDash = true;
+    private bool isDashing;
+    private float dashingPower = 24f;
+    private float dashingTime = 0.2f;
+    [SerializeField] private float dashingCooldown = 1f;
+
+    [SerializeField] private TrailRenderer tr;
+
+    //Animation
+    private enum movementState { idle, running, jumping, fall }
+
 
     // Start is called before the first frame update
     private void Start()
@@ -32,51 +42,30 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (isDashing)
+        {
+            return;
+        }
 
-        //Disable movement while dashing
-        //if (isDashing)
-        //{
-          //  return;
-       // }
-
-        //Moving left or right
 
         dirX = Input.GetAxis("Horizontal");
-        RB.velocity = new Vector2 (dirX * moveSpeed, RB.velocity.y);
+        RB.velocity = new Vector2(dirX * moveSpeed, RB.velocity.y);
 
-        //Jumping
-        if (isGrounded() && Input.GetButton("Jump"))
+        if (Input.GetButtonDown("Jump") && isGrounded())
         {
             RB.velocity = new Vector2(RB.velocity.x, jumpForce);
-
-            doubleJump = false;
         }
 
-
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
-            if (!isGrounded() && !doubleJump)
-            {
-                anim.SetBool("doubleJump", true);
-                RB.velocity = new Vector2(RB.velocity.x, jumpForce);
-                doubleJump = !doubleJump;
-            }
-            
+            StartCoroutine(Dash());
         }
-
-        //Do dashing
-        //if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-        //{
-            //StartCoroutine(Dash());
-        //}
 
 
 
         //Calls the animation
-
         updateAnimation();
 
-       
     }
 
     private void updateAnimation()
@@ -103,7 +92,8 @@ public class PlayerMovement : MonoBehaviour
         if (RB.velocity.y > .0001f)
         {
             state = movementState.jumping;
-        }else if (RB.velocity.y < -0.0001f)
+        }
+        else if (RB.velocity.y < -0.0001f)
         {
             state = movementState.fall;
         }
@@ -120,5 +110,28 @@ public class PlayerMovement : MonoBehaviour
         */
 
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.1f, jumpableGround);
+    }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = RB.gravityScale;
+        RB.gravityScale = 0f;
+        if (!sprite.flipX)
+        {
+            RB.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        }
+        else if (sprite.flipX)
+        {
+            RB.velocity = new Vector2(transform.localScale.x * -dashingPower, 0f);
+        }
+        tr.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        tr.emitting = false;
+        RB.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
 }
