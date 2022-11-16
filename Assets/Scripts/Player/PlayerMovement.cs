@@ -22,7 +22,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing;
     private float dashingPower = 24f;
     private float dashingTime = 0.2f;
+    private bool invulnerable;
     [SerializeField] private float dashingCooldown = 1f;
+    public bool dodge;
 
     [SerializeField] private TrailRenderer tr;
 
@@ -37,11 +39,13 @@ public class PlayerMovement : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        dodge = false;
     }
 
     // Update is called once per frame
     private void Update()
     {
+
         if (isDashing)
         {
             return;
@@ -114,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
+        dodge = true;
         canDash = false;
         isDashing = true;
         float originalGravity = RB.gravityScale;
@@ -133,5 +138,6 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+        dodge = false;
     }
 }
