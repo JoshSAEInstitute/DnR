@@ -4,23 +4,31 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    GameObject target;
+    private GameObject target;
     public float speed;
-    Rigidbody2D bulletRB;
+    private Rigidbody2D bulletRB;
+
+    private SpriteRenderer sprite;
 
     // Start is called before the first frame update
     void Start()
     {
+        sprite = GetComponent<SpriteRenderer>();
         bulletRB = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player");
-        Vector2 moveDir = (target.transform.position - transform.position).normalized * speed;
-        bulletRB.velocity = new Vector2 (moveDir.x, moveDir.y);
-        Destroy(this.gameObject, 2);
+        Vector2 moveDir = (target.transform.position - transform.position);
+
+        if(moveDir.x > 0)
+        {
+            sprite.flipX = true;
+        }
+        else
+        {
+            sprite.flipX = false;
+        }
+
+        bulletRB.velocity = new Vector2 (moveDir.x, 0f).normalized * speed;
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
