@@ -10,7 +10,6 @@ public class Enemy_Shoot : MonoBehaviour
 
     //Faceplayer
     private SpriteRenderer sprite;
-    private Vector2 tempScale;
 
     //Animation
     private Animator anim;
@@ -42,6 +41,7 @@ public class Enemy_Shoot : MonoBehaviour
             //Run Anim
             anim.SetBool("moving", true);
 
+            //Object approaches player
             transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
         }
         else if (distanceFromPlayer <= shootingRange && nextFire < Time.time)
@@ -67,7 +67,6 @@ public class Enemy_Shoot : MonoBehaviour
 
     private void FacePlayer()
     {
-        tempScale = transform.localScale;
 
         if (transform.position.x > player.position.x)
         {
@@ -78,7 +77,6 @@ public class Enemy_Shoot : MonoBehaviour
             sprite.flipX = true;
         }
 
-        transform.localScale = tempScale;
 
     }
 
