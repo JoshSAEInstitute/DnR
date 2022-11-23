@@ -13,7 +13,7 @@ public class Enemy_Shoot : MonoBehaviour
     private Transform player;
 
     //Faceplayer
-    private SpriteRenderer sprite;
+    private Vector3 tempScale;
 
     //Animation
     private Animator anim;
@@ -30,7 +30,6 @@ public class Enemy_Shoot : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
     }
 
@@ -73,17 +72,18 @@ public class Enemy_Shoot : MonoBehaviour
     private void FacePlayer()
     {
         //Face the player
+        tempScale = transform.localScale;
 
-        if (transform.position.x > player.position.x)
+        if(transform.position.x > player.position.x)
         {
-            sprite.flipX = false;
+            tempScale.x = Mathf.Abs(tempScale.x);
         }
         else
         {
-            sprite.flipX = true;
+            tempScale.x = -Mathf.Abs(tempScale.x);
         }
 
-
+        transform.localScale = tempScale;
     }
 
     private void ShootPlayer()
