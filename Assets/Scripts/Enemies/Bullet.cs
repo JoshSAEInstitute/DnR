@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
 
     private SpriteRenderer sprite;
 
-    // Start is called before the first frame update
+    //All the bullets calculations are made as soon as it spawns
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -18,6 +18,7 @@ public class Bullet : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player");
         Vector2 moveDir = (target.transform.position - transform.position);
 
+        //The bullet sprite is flipped depending on where the enmy is facing
         if(moveDir.x > 0)
         {
             sprite.flipX = true;

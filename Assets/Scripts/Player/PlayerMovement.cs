@@ -4,29 +4,36 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    //Sprites and Animation
     private Rigidbody2D RB;
     private BoxCollider2D coll;
     private SpriteRenderer sprite;
     private Animator anim;
-
-    [SerializeField] private LayerMask jumpableGround;
 
     //Basic Movements
     private float dirX = 0f;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 14f;
 
+    //Check if can jump
+    [SerializeField] private LayerMask jumpableGround;
+
     //Dashing
     private bool canDash = true;
     private bool isDashing;
     private float dashingPower = 24f;
     private float dashingTime = 0.2f;
-    private bool invulnerable;
     [SerializeField] private float dashingCooldown = 1f;
-    public bool dodge;
-
     [SerializeField] private TrailRenderer tr;
+
+    //Health
+    private Health myHealth;
+    /*
+    public int maxHealth = 3;
+    public int currenthealth;
+
+    public HealthBar healthBar;
+    */
 
     //Animation
     private enum movementState { idle, running, jumping, fall }
@@ -35,11 +42,18 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        //Gets all components
         RB = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        dodge = false;
+        myHealth = GetComponent<Health>();
+
+        /*
+        //Sets HP
+        currenthealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+        */
     }
 
     // Update is called once per frame
@@ -64,6 +78,15 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
+
+        
+        /*
+        //To check if the healthbar works
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            myHealth.TakeDamage(1);
+        }
+        */
 
 
 
@@ -118,11 +141,15 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        dodge = true;
+        //Check if player can dash
         canDash = false;
         isDashing = true;
+
+        //Removes gravity so that the player stais in air when dashing in air
         float originalGravity = RB.gravityScale;
         RB.gravityScale = 0f;
+
+        //Flips the sprite when dashing left or right
         if (!sprite.flipX)
         {
             RB.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
@@ -134,10 +161,21 @@ public class PlayerMovement : MonoBehaviour
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
+
+        //Re-applies gravity
         RB.gravityScale = originalGravity;
+
+        //Cooldown for dashing again
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
-        dodge = false;
     }
+
+    /*
+    void TakeDamage(int damage)
+    {
+        currenthealth -= damage;
+        healthBar.SetHealth(currenthealth);
+    }
+    */
 }
