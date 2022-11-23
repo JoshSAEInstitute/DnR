@@ -10,13 +10,16 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator anim;
 
+    //Health
+    private Health myHealth;
+
+    //Check if can jump
+    [SerializeField] private LayerMask jumpableGround;
+
     //Basic Movements
     private float dirX = 0f;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 14f;
-
-    //Check if can jump
-    [SerializeField] private LayerMask jumpableGround;
 
     //Dashing
     private bool canDash = true;
@@ -26,14 +29,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashingCooldown = 1f;
     [SerializeField] private TrailRenderer tr;
 
-    //Health
-    private Health myHealth;
-    /*
-    public int maxHealth = 3;
-    public int currenthealth;
+    //Energy
+    private float energy;
 
-    public HealthBar healthBar;
-    */
+    //Shielding
+    private bool canShield;
+
+    //Invulnerable
+    private bool isInvulnerable;
 
     //Animation
     private enum movementState { idle, running, jumping, fall }
@@ -87,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
             myHealth.TakeDamage(1);
         }
         */
+
 
 
 
@@ -171,6 +175,10 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 
+    private void Shield()
+    {
+        //Give the player the ability to shield and become invulnerable. It consumes energy
+    }
     /*
     void TakeDamage(int damage)
     {

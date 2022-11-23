@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Enemy_Shoot : MonoBehaviour
 {
+    //Enemy speed
     public float speed;
+
+    //Enemy line of sight
     public float lineOfSight;
+
     private Transform player;
 
     //Faceplayer
@@ -16,10 +20,11 @@ public class Enemy_Shoot : MonoBehaviour
 
     //Shooting
     public float shootingRange;
-    public GameObject bullet;
-    public GameObject bulletParent;
     public float fireRate = 1;
     private float nextFire;
+
+    public GameObject bullet;
+    public GameObject bulletParent;
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +72,7 @@ public class Enemy_Shoot : MonoBehaviour
 
     private void FacePlayer()
     {
+        //Face the player
 
         if (transform.position.x > player.position.x)
         {
@@ -82,6 +88,8 @@ public class Enemy_Shoot : MonoBehaviour
 
     private void ShootPlayer()
     {
+        //Creates a bullet the shoots the player
+
         Instantiate(bullet, bulletParent.transform.position, Quaternion.identity);
     }
 

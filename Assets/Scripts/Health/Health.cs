@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    //Maximum amount of health an object can have
     public int maxHealth;
+    //The current health of the object
     public int currentHealth;
+
+
     public HealthBar healthBar;
 
     // Start is called before the first frame update
@@ -23,6 +27,8 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        //Allows the object's health to be reduced
+
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
     }
