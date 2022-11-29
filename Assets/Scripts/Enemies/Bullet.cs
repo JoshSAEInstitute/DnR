@@ -10,11 +10,14 @@ public class Bullet : MonoBehaviour
 
     private SpriteRenderer sprite;
 
+    [SerializeField] private int damage;
+
     //All the bullets calculations are made as soon as it spawns
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
         bulletRB = GetComponent<Rigidbody2D>();
+
         target = GameObject.FindGameObjectWithTag("Player");
         Vector2 moveDir = (target.transform.position - transform.position);
 
@@ -36,10 +39,20 @@ public class Bullet : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
         {
-            Debug.Log("Hi");
+            //Debug.Log("Hi");
+            DealDamage(target);
         }
         Destroy(gameObject);
 
+    }
+
+    public void DealDamage(GameObject target)
+    {
+        var atm = target.GetComponent<Health>();
+        if (atm != null)
+        {
+            atm.TakeDamage(damage);
+        }
     }
 
 }
