@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
 
     //Health
-    private Health myHealth;
+    //private Health myHealth;
+    //private int myCurrentHealth;
 
     //Check if can jump
     [SerializeField] private LayerMask jumpableGround;
@@ -50,7 +51,8 @@ public class PlayerMovement : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        myHealth = GetComponent<Health>();
+        //myHealth = GetComponent<Health>();
+        //myCurrentHealth = myHealth.currentHealth;
 
         /*
         //Sets HP

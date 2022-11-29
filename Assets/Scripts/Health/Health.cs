@@ -16,7 +16,11 @@ public class Health : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        if(gameObject.tag == "Player")
+        {
+            healthBar.SetMaxHealth(maxHealth);
+        }
+
     }
 
     // Update is called once per frame
@@ -30,6 +34,10 @@ public class Health : MonoBehaviour
         //Allows the object's health to be reduced
 
         currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
+        if (gameObject.tag == "Player")
+        {
+            healthBar.SetHealth(currentHealth);
+        }
+
     }
 }

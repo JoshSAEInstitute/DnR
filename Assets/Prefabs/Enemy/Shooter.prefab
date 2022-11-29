@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6377770815236330966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.23, y: -0.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9073555243770661663}
@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 9073555243770661661}
   - component: {fileID: 9073555243770661657}
   - component: {fileID: 9073555243770661662}
-  - component: {fileID: 7739501944890973029}
   - component: {fileID: 1210971206459548297}
   m_Layer: 8
   m_Name: Shooter
@@ -184,21 +183,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7739501944890973029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9073555243770661650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5c8f90d501a9474787d085a091bda64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 0
-  currentHealth: 0
-  healthBar: {fileID: 0}
 --- !u!114 &1210971206459548297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,9 +195,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b182e05dfa94e4abdcb17ac2fd4774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  lineOfSight: 0
-  shootingRange: 0
-  fireRate: 1
+  speed: 1
+  lineOfSight: 10.39
+  shootingRange: 4.6
+  fireRate: 5
   bullet: {fileID: 8258617875597427294, guid: 655af8aa3afa96a448d4d13c90289c6c, type: 3}
   bulletParent: {fileID: 6377770815236330966}

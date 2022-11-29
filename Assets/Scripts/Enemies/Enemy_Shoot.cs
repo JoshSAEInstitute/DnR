@@ -9,7 +9,6 @@ public class Enemy_Shoot : MonoBehaviour
 
     //Enemy line of sight
     public float lineOfSight;
-
     private Transform player;
 
     //Faceplayer
@@ -26,11 +25,17 @@ public class Enemy_Shoot : MonoBehaviour
     public GameObject bullet;
     public GameObject bulletParent;
 
+    //Health
+    [SerializeField] private int maxHP;
+    private int currentHP;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         anim = GetComponent<Animator>();
+        currentHP = maxHP;
+
     }
 
     // Update is called once per frame
@@ -91,6 +96,16 @@ public class Enemy_Shoot : MonoBehaviour
         //Creates a bullet the shoots the player
 
         Instantiate(bullet, bulletParent.transform.position, Quaternion.identity);
+    }
+
+    public void EnemyTakeDamage(int damage)
+    {
+        currentHP -= damage;
+        Debug.Log("I was hit");
+        if(currentHP <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
 }

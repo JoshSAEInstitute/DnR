@@ -37,10 +37,13 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
+        if(collision.gameObject.tag == "Player")
         {
             //Debug.Log("Hi");
             DealDamage(target);
+        }else if(collision.gameObject.tag == "Enemy")
+        {
+            DealDamageEnemy(target);
         }
         Destroy(gameObject);
 
@@ -52,6 +55,15 @@ public class Bullet : MonoBehaviour
         if (atm != null)
         {
             atm.TakeDamage(damage);
+        }
+    }
+
+    public void DealDamageEnemy(GameObject target)
+    {
+        var atm = target.GetComponent<Enemy_Shoot>();
+        if (atm != null)
+        {
+            atm.EnemyTakeDamage(damage);
         }
     }
 
