@@ -201,3 +201,6 @@ MonoBehaviour:
   fireRate: 5
   bullet: {fileID: 8258617875597427294, guid: 655af8aa3afa96a448d4d13c90289c6c, type: 3}
   bulletParent: {fileID: 6377770815236330966}
+  maxHP: 1
+  currentHP: 0
+  enemyState: 0
