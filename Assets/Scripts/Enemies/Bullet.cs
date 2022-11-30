@@ -41,10 +41,23 @@ public class Bullet : MonoBehaviour
         {
             //Debug.Log("Hi");
             DealDamage(target);
-        }else if(collision.gameObject.tag == "Enemy")
-        {
-            DealDamageEnemy(target);
         }
+        
+        if(collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Enemy hit");
+            //DealDamageEnemy(target);
+
+            var enemy = collision.collider.GetComponent<Enemy_Shoot>();
+            {
+                Debug.Log("Enemy took damage");
+                if(enemy != null)
+                {
+                    enemy.EnemyTakeDamage(damage);
+                }
+            }
+        }
+
         Destroy(gameObject);
 
     }
@@ -58,13 +71,5 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public void DealDamageEnemy(GameObject target)
-    {
-        var atm = target.GetComponent<Enemy_Shoot>();
-        if (atm != null)
-        {
-            atm.EnemyTakeDamage(damage);
-        }
-    }
 
 }

@@ -26,8 +26,8 @@ public class Enemy_Shoot : MonoBehaviour
     public GameObject bulletParent;
 
     //Health
-    [SerializeField] private int maxHP;
-    private int currentHP;
+    public int maxHP;
+    public int currentHP;
 
     // Start is called before the first frame update
     void Start()
@@ -101,7 +101,9 @@ public class Enemy_Shoot : MonoBehaviour
     public void EnemyTakeDamage(int damage)
     {
         currentHP -= damage;
+
         Debug.Log("I was hit");
+
         if(currentHP <= 0)
         {
             Destroy(gameObject);

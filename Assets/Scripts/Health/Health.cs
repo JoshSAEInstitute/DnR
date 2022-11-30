@@ -23,12 +23,6 @@ public class Health : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void TakeDamage(int damage)
     {
         //Allows the object's health to be reduced
