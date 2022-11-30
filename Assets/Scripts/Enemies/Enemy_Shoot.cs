@@ -29,6 +29,10 @@ public class Enemy_Shoot : MonoBehaviour
     public int maxHP;
     public int currentHP;
 
+    //Behaviour
+    public enum behaviour { idle, approach, shoot}
+    public behaviour enemyState;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +46,81 @@ public class Enemy_Shoot : MonoBehaviour
     void Update()
     {
         FacePlayer();
+        float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+
+        switch (enemyState)
+        {
+            case behaviour.idle:
+
+                anim.SetBool("moving", false);
+                Debug.Log("I'm idling");
+
+                //Check if can shoot
+                if (nextFire < Time.time && distanceFromPlayer <= shootingRange)
+                {
+                    enemyState = behaviour.shoot;
+                }
+
+                //--- to Approach
+                if (distanceFromPlayer < lineOfSight && distanceFromPlayer > shootingRange)
+                {
+                    enemyState = behaviour.approach;
+                }
+
+                break;
+            
+            case behaviour.approach:
+
+                //Run Anim
+                anim.SetBool("moving", true);
+                Debug.Log("I'm approaching");
+
+                //Object approaches player
+                transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
+
+                //--- to Idle
+                if (distanceFromPlayer > lineOfSight)
+                {
+                    enemyState = behaviour.idle;
+                }
+
+                //--- to Shoot
+                if (distanceFromPlayer <= shootingRange)
+                {
+                    enemyState = behaviour.shoot;
+                }
+
+                break;
+
+            case behaviour.shoot:
+
+                Debug.Log("I'm shooting");
+
+                if (nextFire < Time.time)
+                {
+                    //Shoot Anim
+                    anim.SetTrigger("rangedAttack");
+
+                    //Enemy shoot rate
+                    nextFire = Time.time + fireRate;
+                } 
+                else
+                {
+                    //--- to Idle until it can shoot
+                    enemyState = behaviour.idle;
+                }
+
+                //--- to Approach
+                if (distanceFromPlayer >= shootingRange)
+                {
+                    enemyState = behaviour.approach;
+                }
+
+                break;
+
+        }
+
+        /*
 
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
 
@@ -63,7 +142,7 @@ public class Enemy_Shoot : MonoBehaviour
             //Idle
             anim.SetBool("moving", false);
         }
-
+        */
 
     }
 
@@ -72,6 +151,11 @@ public class Enemy_Shoot : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, lineOfSight);
         Gizmos.DrawWireSphere(transform.position, shootingRange);
+    }
+
+    public void updateBehavior()
+    {
+        
     }
 
     private void FacePlayer()
