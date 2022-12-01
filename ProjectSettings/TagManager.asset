@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Trap
+  - Collectible
   layers:
   - Default
   - TransparentFX
