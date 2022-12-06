@@ -15,7 +15,7 @@ public class ItemCollector : MonoBehaviour
         {
             Destroy(collision.gameObject);
             collectible++;
-            collectiblesText.text = "Strawberries: " + collectible;
+            collectiblesText.text = "Fruits: " + collectible;
         }
     }
 

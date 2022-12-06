@@ -53,7 +53,7 @@ public class Enemy_Shoot : MonoBehaviour
             case behaviour.idle:
 
                 anim.SetBool("moving", false);
-                Debug.Log("I'm idling");
+                //Debug.Log("I'm idling");
 
                 //Check if can shoot
                 if (nextFire < Time.time && distanceFromPlayer <= shootingRange)
@@ -73,7 +73,7 @@ public class Enemy_Shoot : MonoBehaviour
 
                 //Run Anim
                 anim.SetBool("moving", true);
-                Debug.Log("I'm approaching");
+                //Debug.Log("I'm approaching");
 
                 //Object approaches player
                 transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
@@ -94,7 +94,7 @@ public class Enemy_Shoot : MonoBehaviour
 
             case behaviour.shoot:
 
-                Debug.Log("I'm shooting");
+                //Debug.Log("I'm shooting");
 
                 if (nextFire < Time.time)
                 {
