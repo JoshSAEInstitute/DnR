@@ -48,12 +48,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: InFront of BackGround
+    uniqueID: 1688609439
+    locked: 0
+  - name: Terrain
+    uniqueID: 524015279
+    locked: 0
   - name: Enemies
     uniqueID: 794855569
     locked: 0
   - name: Player
     uniqueID: 1945425581
-    locked: 0
-  - name: Terrain
-    uniqueID: 524015279
     locked: 0
