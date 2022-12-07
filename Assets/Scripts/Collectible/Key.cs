@@ -9,6 +9,7 @@ public class Key : MonoBehaviour
 
     public enum KeyType
     {
+        //Possible key types
         Strawberry,
         Cherry,
         Melon
