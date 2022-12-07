@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8515084277508120156}
   - component: {fileID: 8515084277508120157}
   - component: {fileID: 8515084277508120146}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1945425581
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2cebb83e3d9b5b247be3eb722143beb7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 8515084278784692501}
   - component: {fileID: 8515084278784692490}
   - component: {fileID: 8515084278784692491}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hinge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 1.1979121, y: -0.05040066}
+  m_ConnectedAnchor: {x: 1.1979122, y: -0.05040026}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -269,9 +269,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8515084279069687984}
-  - component: {fileID: 8515084279069687987}
   - component: {fileID: 8515084279069687986}
-  m_Layer: 0
+  - component: {fileID: 8515084279069687987}
+  m_Layer: 7
   m_Name: DoorHinge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,19 +294,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8515084279069687987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8515084279069687985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 842eb2fd5c6da174b8b09467f30f6b9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyType: 1
 --- !u!61 &8515084279069687986
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -333,3 +320,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 4.2180023}
   m_EdgeRadius: 0
+--- !u!114 &8515084279069687987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8515084279069687985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842eb2fd5c6da174b8b09467f30f6b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyType: 1

@@ -51,6 +51,9 @@ TagManager:
   - name: InFront of BackGround
     uniqueID: 1688609439
     locked: 0
+  - name: BackDetails
+    uniqueID: 756908363
+    locked: 0
   - name: Terrain
     uniqueID: 524015279
     locked: 0
