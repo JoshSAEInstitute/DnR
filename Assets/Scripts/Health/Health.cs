@@ -16,10 +16,8 @@ public class Health : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        if(gameObject.tag == "Player")
-        {
-            healthBar.SetMaxHealth(maxHealth);
-        }
+        healthBar.SetMaxHealth(maxHealth);
+
 
     }
 
@@ -28,8 +26,20 @@ public class Health : MonoBehaviour
         //Allows the object's health to be reduced
 
         currentHealth -= damage;
-        if (gameObject.tag == "Player")
+        healthBar.SetHealth(currentHealth);
+
+
+    }
+
+    public void GainHealth(int healing)
+    {
+        if(currentHealth < maxHealth)
         {
+            currentHealth += healing;
+            healthBar.SetHealth(currentHealth);
+        } else if(healing > maxHealth - currentHealth)
+        {
+            currentHealth = currentHealth + (maxHealth - currentHealth);
             healthBar.SetHealth(currentHealth);
         }
 

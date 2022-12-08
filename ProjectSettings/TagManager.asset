@@ -8,6 +8,7 @@ TagManager:
   - Trap
   - Collectible
   - OneWayPlatform
+  - Health Collectible
   layers:
   - Default
   - TransparentFX
