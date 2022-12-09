@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Check if can jump
     [SerializeField] private LayerMask jumpableGround;
+    [SerializeField] private LayerMask jumpableEnemy;
 
     //Basic Movements
     private float dirX = 0f;
@@ -74,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         dirX = Input.GetAxis("Horizontal");
         RB.velocity = new Vector2(dirX * moveSpeed, RB.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && isGrounded())
+        if ((Input.GetButtonDown("Jump") && isGrounded()) || (Input.GetButtonDown("Jump") && isOnEnemy()))
         {
             RB.velocity = new Vector2(RB.velocity.x, jumpForce);
         }
@@ -143,6 +144,12 @@ public class PlayerMovement : MonoBehaviour
         */
 
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.1f, jumpableGround);
+
+    }
+
+    private bool isOnEnemy()
+    {
+        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.1f, jumpableEnemy);
     }
 
     private IEnumerator Dash()
