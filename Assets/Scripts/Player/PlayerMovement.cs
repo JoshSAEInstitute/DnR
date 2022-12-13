@@ -31,15 +31,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashingCooldown = 1f;
     [SerializeField] private TrailRenderer tr;
 
-    //Energy
-    private float energy;
-
-    //Shielding
-    private bool canShield;
-
-    //Invulnerable
-    private bool isInvulnerable;
-
     //Animation
     private enum movementState { idle, running, jumping, fall }
 
@@ -184,10 +175,6 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 
-    private void Shield()
-    {
-        //Give the player the ability to shield and become invulnerable. It consumes energy
-    }
     /*
     void TakeDamage(int damage)
     {

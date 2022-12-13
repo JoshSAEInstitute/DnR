@@ -5,11 +5,14 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private GameObject target;
+
+    //Bullet speed
     public float speed;
     private Rigidbody2D bulletRB;
 
     private SpriteRenderer sprite;
 
+    //Bullet Damage
     [SerializeField] private int damage;
 
     //All the bullets calculations are made as soon as it spawns

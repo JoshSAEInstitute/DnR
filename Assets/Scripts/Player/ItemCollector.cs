@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class ItemCollector : MonoBehaviour
 {
+    //Collectible Number
     private int collectible = 0;
     private Health gainHealth;
+
+    //Regain how much health
     [SerializeField] private int regainHealth;
 
     [SerializeField] private Text collectiblesText;

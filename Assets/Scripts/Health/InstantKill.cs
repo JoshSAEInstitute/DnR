@@ -8,6 +8,8 @@ public class InstantKill : MonoBehaviour
     private Health death;
 
     private GameObject target;
+
+    //Kill Player
     [SerializeField] private int damage;
 
     // Start is called before the first frame update

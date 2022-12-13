@@ -7,6 +7,8 @@ public class KillPlayer : MonoBehaviour
 {
 
     private Health checkHealth;
+
+    //Where to respawn the player
     public int Respawn;
 
     // Start is called before the first frame update

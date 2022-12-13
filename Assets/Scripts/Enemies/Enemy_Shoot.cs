@@ -184,6 +184,7 @@ public class Enemy_Shoot : MonoBehaviour
 
     public void EnemyTakeDamage(int damage)
     {
+        //Enemy takes damage
         currentHP -= damage;
 
         Debug.Log("I was hit");
