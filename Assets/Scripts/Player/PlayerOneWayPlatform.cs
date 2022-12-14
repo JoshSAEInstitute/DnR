@@ -1,16 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerOneWayPlatform : MonoBehaviour
 {
+    //Input Systems
+    public PlayerInputActions pcs;
+    private InputAction down;
+
     //Storing the OneWayPlatform (OWP) we are standing on
     private GameObject currentOneWayPlatform;
 
     [SerializeField] private BoxCollider2D playerCollider;
 
+    private void Awake()
+    {
+        pcs = new PlayerInputActions();
+    }
+
+    private void OnEnable()
+    {
+        down = pcs.Player.Down;
+        down.Enable();
+        down.performed += Down;
+    }
+
+    private void OnDisable()
+    {
+        down.Disable();
+
+    }
+
     private void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             if (currentOneWayPlatform != null)
@@ -18,6 +42,16 @@ public class PlayerOneWayPlatform : MonoBehaviour
                 //Start coroutine
                 StartCoroutine(DisableCollision());
             }
+        }
+        */
+    }
+
+    private void Down(InputAction.CallbackContext context)
+    {
+        if (currentOneWayPlatform != null)
+        {
+            //Start coroutine
+            StartCoroutine(DisableCollision());
         }
     }
 

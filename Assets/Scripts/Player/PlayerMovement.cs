@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask jumpableEnemy;
 
     //Basic Movements
-    private float dirX = 0f;
+    public Vector2 dirX;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 14f;
 
@@ -34,6 +35,42 @@ public class PlayerMovement : MonoBehaviour
     //Animation
     private enum movementState { idle, running, jumping, fall }
 
+    //Input Systems
+    public PlayerInputActions pcs;
+    private InputAction move, exit, jump, dash;
+
+    private void Awake()
+    {
+        pcs = new PlayerInputActions();
+    }
+
+    private void OnEnable()
+    {
+        move = pcs.Player.Move;
+        move.Enable();
+
+        exit = pcs.Player.Exit;
+        exit.Enable();
+        exit.performed += Exit;
+
+        jump = pcs.Player.Jump;
+        jump.Enable();
+        jump.performed += Jump;
+
+        
+        dash = pcs.Player.Dash;
+        dash.Enable();
+        dash.performed += ButtonDash;
+        
+    }
+
+    private void OnDisable()
+    {
+        move.Disable();
+        jump.Disable();
+        dash.Disable();
+        exit.Disable();
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -63,20 +100,48 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        dirX = Input.GetAxis("Horizontal");
-        RB.velocity = new Vector2(dirX * moveSpeed, RB.velocity.y);
+        //dirX = Input.GetAxis("Horizontal");
+        //RB.velocity = new Vector2(dirX * moveSpeed, RB.velocity.y);
 
+        
+        dirX = move.ReadValue<Vector2>();
+        RB.velocity = new Vector2(dirX.x * moveSpeed, RB.velocity.y);
+
+        /*
+        if(myInput.x > 0)
+        {
+
+        }
+        else if(myInput.x < 0)
+        {
+
+        }
+        */
+
+        /*
+        Vector2 dirX = move.ReadValue<Vector2>();
+        transform.Translate(new Vector2(dirX.x, dirX.y) * Time.deltaTime * moveSpeed);
+        */
+
+        //Vector2 dirX = move.ReadValue<Vector2>();
+        //RB.velocity = new Vector2(dirX.x * moveSpeed, 0);
+
+
+
+        /*
         if ((Input.GetButtonDown("Jump") && isGrounded()) || (Input.GetButtonDown("Jump") && isOnEnemy()))
         {
             RB.velocity = new Vector2(RB.velocity.x, jumpForce);
         }
-
+        */
+        /*
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             StartCoroutine(Dash());
         }
+        */
 
-        
+
         /*
         //To check if the healthbar works
         if(Input.GetKeyDown(KeyCode.L))
@@ -99,12 +164,12 @@ public class PlayerMovement : MonoBehaviour
 
         movementState state;
 
-        if (dirX > 0f)
+        if (dirX.x > 0f)
         {
             state = movementState.running;
             sprite.flipX = false;
         }
-        else if (dirX < 0f)
+        else if (dirX.x < 0f)
         {
             state = movementState.running;
             sprite.flipX = true;
@@ -126,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
         anim.SetInteger("state", (int)state);
     }
 
-    private bool isGrounded()
+    public bool isGrounded()
     {
         /*
          * Creates a box around the player with the same shape of the box collider,
@@ -138,12 +203,12 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private bool isOnEnemy()
+    public bool isOnEnemy()
     {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.1f, jumpableEnemy);
     }
 
-    private IEnumerator Dash()
+    public IEnumerator Dash()
     {
         //Check if player can dash
         canDash = false;
@@ -173,6 +238,29 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+    }
+
+    private void Jump(InputAction.CallbackContext context)
+    {
+        if(isGrounded() || isOnEnemy())
+        {
+            RB.velocity = new Vector2(RB.velocity.x, jumpForce);
+        }
+    }
+
+    private void ButtonDash(InputAction.CallbackContext context)
+    {
+        if(canDash)
+        {
+            StartCoroutine(Dash());
+        }
+
+    }
+
+    private void Exit(InputAction.CallbackContext context)
+    {
+        Debug.Log("Exit");
+        Application.Quit();
     }
 
     /*
