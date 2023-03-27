@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 9073555243770661657}
   - component: {fileID: 9073555243770661662}
   - component: {fileID: 1210971206459548297}
+  - component: {fileID: 189865666}
   m_Layer: 8
   m_Name: Shooter
   m_TagString: Enemy
@@ -104,7 +105,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 794855569
-  m_SortingLayer: 1
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -5219337101871392587, guid: bf4df7b2c9cda4c44b372e2b47a5cb8f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -190,7 +191,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9073555243770661650}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35b182e05dfa94e4abdcb17ac2fd4774, type: 3}
   m_Name: 
@@ -201,6 +202,24 @@ MonoBehaviour:
   fireRate: 5
   bullet: {fileID: 8258617875597427294, guid: 655af8aa3afa96a448d4d13c90289c6c, type: 3}
   bulletParent: {fileID: 6377770815236330966}
+  maxHP: 1
+  currentHP: 0
+  enemyState: 0
+--- !u!114 &189865666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9073555243770661650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93861fd3b6d1cc242820eb52322a4d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  lineOfSight: 10
+  tooCloseRange: 5
   maxHP: 1
   currentHP: 0
   enemyState: 0

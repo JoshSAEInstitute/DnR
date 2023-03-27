@@ -54,48 +54,38 @@ public class Enemy_Shoot : MonoBehaviour
 
                 anim.SetBool("moving", false);
                 //Debug.Log("I'm idling");
-
                 //Check if can shoot
                 if (nextFire < Time.time && distanceFromPlayer <= shootingRange)
                 {
                     enemyState = behaviour.shoot;
                 }
-
                 //--- to Approach
                 if (distanceFromPlayer < lineOfSight && distanceFromPlayer > shootingRange)
                 {
                     enemyState = behaviour.approach;
                 }
-
                 break;
             
             case behaviour.approach:
-
                 //Run Anim
                 anim.SetBool("moving", true);
                 //Debug.Log("I'm approaching");
-
                 //Object approaches player
                 transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
-
                 //--- to Idle
                 if (distanceFromPlayer > lineOfSight)
                 {
                     enemyState = behaviour.idle;
                 }
-
                 //--- to Shoot
                 if (distanceFromPlayer <= shootingRange)
                 {
                     enemyState = behaviour.shoot;
                 }
-
                 break;
 
             case behaviour.shoot:
-
                 //Debug.Log("I'm shooting");
-
                 if (nextFire < Time.time)
                 {
                     //Shoot Anim
@@ -109,15 +99,12 @@ public class Enemy_Shoot : MonoBehaviour
                     //--- to Idle until it can shoot
                     enemyState = behaviour.idle;
                 }
-
                 //--- to Approach
                 if (distanceFromPlayer >= shootingRange)
                 {
                     enemyState = behaviour.approach;
                 }
-
                 break;
-
         }
 
         /*
