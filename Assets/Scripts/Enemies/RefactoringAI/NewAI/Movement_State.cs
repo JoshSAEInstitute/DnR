@@ -26,8 +26,8 @@ public class Movement_State : MonoBehaviour
     public int currentHP;
 
     //Behaviour
-    public enum behaviour { idle, approach, leave }
-    public behaviour enemyState;
+    public enum movingBehaviour { idle, approach, leave }
+    public movingBehaviour movingState;
 
     // Start is called before the first frame update
     void Start()
@@ -44,27 +44,27 @@ public class Movement_State : MonoBehaviour
         FacePlayer();
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
 
-        switch (enemyState)
+        switch (movingState)
         {
-            case behaviour.idle:
+            case movingBehaviour.idle:
 
                 anim.SetBool("moving", false);
 
                 //--- to Approach
                 if (distanceFromPlayer < lineOfSight && distanceFromPlayer > goodRange)
                 {
-                    enemyState = behaviour.approach;
+                    movingState = movingBehaviour.approach;
                 }
 
                 //--- to Leave
                 if (distanceFromPlayer < tooCloseRange && distanceFromPlayer < goodRange)
                 {
-                    enemyState = behaviour.leave;
+                    movingState = movingBehaviour.leave;
                 }
 
                 break;
 
-            case behaviour.approach:
+            case movingBehaviour.approach:
                 //Run Anim
                 speed = originalSpeed;
                 anim.SetBool("moving", true);
@@ -75,16 +75,16 @@ public class Movement_State : MonoBehaviour
                 if (distanceFromPlayer > lineOfSight || distanceFromPlayer < goodRange)
                 {
 
-                    enemyState = behaviour.idle;
+                    movingState = movingBehaviour.idle;
                 }
                 //--- to Leave
                 if (distanceFromPlayer <= tooCloseRange)
                 {
-                    enemyState = behaviour.leave;
+                    movingState = movingBehaviour.leave;
                 }
                 break;
 
-            case behaviour.leave:
+            case movingBehaviour.leave:
                 speed = runAwaySpeed;
                 anim.SetBool("moving", true);
 
@@ -92,12 +92,12 @@ public class Movement_State : MonoBehaviour
                 //--- to Idle
                 if (distanceFromPlayer > goodRange)
                 {
-                    enemyState = behaviour.idle;
+                    movingState = movingBehaviour.idle;
                 }
                 //--- to Approach
                 if (distanceFromPlayer > tooCloseRange)
                 {
-                    enemyState = behaviour.approach;
+                    movingState = movingBehaviour.approach;
                 }
                 break;
         }

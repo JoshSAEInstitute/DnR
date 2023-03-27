@@ -140,11 +140,6 @@ public class Enemy_Shoot : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, shootingRange);
     }
 
-    public void updateBehavior()
-    {
-        
-    }
-
     private void FacePlayer()
     {
         //Face the player
