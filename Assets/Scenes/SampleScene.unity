@@ -46730,24 +46730,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 189865666, guid: d50c9aa0059f0764892c5f25e3e55b1e, type: 3}
-      propertyPath: speed
-      value: 2
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 189865666, guid: d50c9aa0059f0764892c5f25e3e55b1e, type: 3}
-      propertyPath: runSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 189865666, guid: d50c9aa0059f0764892c5f25e3e55b1e, type: 3}
-      propertyPath: goodRange
+    - target: {fileID: 331165356, guid: d50c9aa0059f0764892c5f25e3e55b1e, type: 3}
+      propertyPath: fireRate
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 189865666, guid: d50c9aa0059f0764892c5f25e3e55b1e, type: 3}
-      propertyPath: runAwaySpeed
-      value: 4
+    - target: {fileID: 331165356, guid: d50c9aa0059f0764892c5f25e3e55b1e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 189865666, guid: d50c9aa0059f0764892c5f25e3e55b1e, type: 3}
-      propertyPath: tooCloseRange
-      value: 3
+    - target: {fileID: 1210971206459548297, guid: d50c9aa0059f0764892c5f25e3e55b1e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9073555243770661650, guid: d50c9aa0059f0764892c5f25e3e55b1e, type: 3}
       propertyPath: m_Name

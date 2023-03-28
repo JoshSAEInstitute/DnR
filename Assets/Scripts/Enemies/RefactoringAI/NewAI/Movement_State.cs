@@ -25,30 +25,30 @@ public class Movement_State : MonoBehaviour
     public int maxHP;
     public int currentHP;
 
-    //Behaviour
+    //Movement Behaviour
     public enum movingBehaviour { idle, approach, leave }
     public movingBehaviour movingState;
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         anim = GetComponent<Animator>();
         currentHP = maxHP;
 
+        //Stores the enemy's normal speed
         originalSpeed = speed;
     }
 
     void Update()
     {
+        //As the name states, this will face the player
         FacePlayer();
+        //Calculates distance between this and the player
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
 
         switch (movingState)
         {
             case movingBehaviour.idle:
-
-                anim.SetBool("moving", false);
 
                 //--- to Approach
                 if (distanceFromPlayer < lineOfSight && distanceFromPlayer > goodRange)
@@ -69,12 +69,11 @@ public class Movement_State : MonoBehaviour
                 speed = originalSpeed;
                 anim.SetBool("moving", true);
 
-                //Object approaches player
+                //Enemy approaches the player
                 transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
                 //--- to Idle
                 if (distanceFromPlayer > lineOfSight || distanceFromPlayer < goodRange)
                 {
-
                     movingState = movingBehaviour.idle;
                 }
                 //--- to Leave
@@ -85,9 +84,11 @@ public class Movement_State : MonoBehaviour
                 break;
 
             case movingBehaviour.leave:
+                //Makes the enemy faster when running away from player
                 speed = runAwaySpeed;
                 anim.SetBool("moving", true);
 
+                //Enemy leaves the player
                 transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime * -1);
                 //--- to Idle
                 if (distanceFromPlayer > goodRange)
@@ -108,6 +109,7 @@ public class Movement_State : MonoBehaviour
         //Face the player
         tempScale = transform.localScale;
 
+        //Flipping the sprite by its x values
         if (transform.position.x > player.position.x)
         {
             tempScale.x = Mathf.Abs(tempScale.x);
@@ -125,7 +127,7 @@ public class Movement_State : MonoBehaviour
         //Enemy takes damage
         currentHP -= damage;
 
-        Debug.Log("I was hit");
+        //Debug.Log("I was hit");
 
         if (currentHP <= 0)
         {

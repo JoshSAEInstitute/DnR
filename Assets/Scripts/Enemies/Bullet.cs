@@ -44,9 +44,8 @@ public class Bullet : MonoBehaviour
         {
             //Debug.Log("Hi");
             DealDamage(target);
-        }
-        
-        if(collision.gameObject.tag == "Enemy")
+            Destroy(gameObject);
+        } else if(collision.gameObject.tag == "Enemy")
         {
             Debug.Log("Enemy hit");
             //DealDamageEnemy(target);
@@ -58,10 +57,19 @@ public class Bullet : MonoBehaviour
                 {
                     enemy.EnemyTakeDamage(damage);
                 }
+                Destroy(gameObject);
             }
+        } else if (collision.gameObject.tag == "Bullet")
+        {
+
+        }
+        else
+        {
+            Debug.Log("The bullet " + this + " has hit " + collision.gameObject.name);
+            Destroy(gameObject);
         }
 
-        Destroy(gameObject);
+
 
     }
 

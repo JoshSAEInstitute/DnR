@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 9073555243770661662}
   - component: {fileID: 1210971206459548297}
   - component: {fileID: 189865666}
+  - component: {fileID: 331165356}
   m_Layer: 8
   m_Name: Shooter
   m_TagString: Enemy
@@ -199,7 +200,7 @@ MonoBehaviour:
   speed: 1
   lineOfSight: 10.39
   shootingRange: 4.6
-  fireRate: 5
+  fireRate: 0.5
   bullet: {fileID: 8258617875597427294, guid: 655af8aa3afa96a448d4d13c90289c6c, type: 3}
   bulletParent: {fileID: 6377770815236330966}
   maxHP: 1
@@ -217,9 +218,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93861fd3b6d1cc242820eb52322a4d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 2
+  runAwaySpeed: 4
   lineOfSight: 10
-  tooCloseRange: 5
+  tooCloseRange: 3
+  goodRange: 5
   maxHP: 1
   currentHP: 0
-  enemyState: 0
+  movingState: 0
+--- !u!114 &331165356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9073555243770661650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ddfb586c80a4bd4289f872f508eb720, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootingRange: 5
+  fireRate: 1
+  bullet: {fileID: 8258617875597427294, guid: 655af8aa3afa96a448d4d13c90289c6c, type: 3}
+  bulletParent: {fileID: 6377770815236330966}
+  movingState: 0
